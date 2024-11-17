@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.navbar-custom {
+    background-color: #789cf1;
+    color: black;
+}
+
+.navbar-custom .nav-link {
+    color: black;
+}
+
+.navbar-custom .nav-link:hover {
+    color: #1E90FF;
+}
