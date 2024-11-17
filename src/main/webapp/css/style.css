@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* Página Index */
 .navbar-custom {
     background-color: #789cf1;
     color: black;
@@ -11,4 +12,19 @@
 
 .navbar-custom .nav-link:hover {
     color: #1E90FF;
+}
+
+/* Fundo página de login */
+body {
+    background-color: #f4f4f9;
+}
+
+/* Container da página de login */
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }

@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Aeroporto DSW1</title>
+	<meta charset="UTF-8">
+	<title>Aeroporto DSW1</title>
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<jsp:include page="/includes/base.html" />
