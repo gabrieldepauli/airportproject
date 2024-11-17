@@ -36,6 +36,10 @@
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            
+            <div class="text-center mt-3">
+                <br><a href="index.jsp" class="btn btn-secondary">Voltar ao Menu</a>
+            </div>
         </form>
         
     </div>
