@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,8 +12,8 @@
 
     <div class="login-container">
         <h2 class="text-center">Login</h2>
-		
-		<!-- Caso insira login e senha errados, esse método ira gerar a mensagem de erro na tela -->
+
+        <!-- Exibe a mensagem de erro se o parâmetro 'error' for passado na URL -->
         <%
             String error = request.getParameter("error");
             if (error != null && error.equals("true")) {
@@ -26,7 +25,7 @@
             }
         %>
 
-        <form action="login" method="POST">
+        <form action="login.do" method="POST">
             <div class="form-group">
                 <label for="username">Nome de Usuário</label>
                 <input type="text" class="form-control" id="username" name="username" required>
@@ -45,4 +44,4 @@
     </div>
 
 </body>
-</html>
+</html> 

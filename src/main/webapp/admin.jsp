@@ -23,13 +23,13 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled">
-                        <li><a href="cadastrarVoo.jsp" class="btn btn-primary btn-block mb-2">Cadastrar Voo</a></li>
+                        <li><a href="cadastrarVoo.do?action=cadastrarVoo" class="btn btn-primary btn-block mb-2">Cadastrar Voo</a></li>
                         <li><a href="atualizarVoo.jsp" class="btn btn-warning btn-block">Atualizar Voo</a></li>
                     </ul>
                 </div>
             </div>
 
-            <form action="login" method="GET" class="mt-4">
+            <form action="login.do?action=logout" method="POST" class="mt-4">
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
             
