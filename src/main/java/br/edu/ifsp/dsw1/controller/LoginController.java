@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 public class LoginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final String HOME_PAGE = "admin.jsp"; // página que será criada para as funções do admin (ainda não existe)
+    private static final String HOME_PAGE = "admin.jsp";
     private static final String LOGIN_PAGE = "login.jsp";
 
     @Override
