@@ -7,7 +7,7 @@ public class TookOff implements State {
 	
 	private TookOff() { }
 	
-	public static TookOff getIntance() {
+	public static TookOff getInstance() {
 		if (instance == null) {
 			instance = new TookOff();
 		}

@@ -2,6 +2,7 @@ package br.edu.ifsp.dsw1.controller;
 
 import br.edu.ifsp.dsw1.model.entity.FlightData;
 import br.edu.ifsp.dsw1.model.entity.FlightDataCollection;
+import br.edu.ifsp.dsw1.model.entity.FlightDataSingleton;
 import br.edu.ifsp.dsw1.model.flightstates.Arriving;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class CadastroVooController extends HttpServlet {
     private static final String ADMIN_PAGE = "admin.jsp";
     private static final String CADASTRO_VOO_PAGE = "cadastrarVoo.jsp";
 
-    private static final FlightDataCollection COLLECTION = new FlightDataCollection();
+    private static final FlightDataCollection COLLECTION = FlightDataSingleton.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,31 +51,41 @@ public class CadastroVooController extends HttpServlet {
         }
     }
 
-    private void cadastrarVoo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       
+    private void cadastrarVoo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        
     	try {
             Long number = parseLongParameter(request, "number");
+            
+            boolean flightExists = COLLECTION.getAllFligthts().stream()
+                    .anyMatch(f -> f.getFlightNumber().equals(number));
+            
+            if (flightExists) {
+                request.setAttribute("errorMessageCadastro", "Já existe um voo com este número.");
+                request.getRequestDispatcher(CADASTRO_VOO_PAGE).forward(request, response);
+            } else {
+                String company = request.getParameter("company").trim();
+                String time = request.getParameter("time").trim();
 
-            String company = request.getParameter("company").trim();
-            String time = request.getParameter("time").trim();
+                FlightData flight = new FlightData(number, company, time);
+                flight.setState(Arriving.getInstance());
 
-            FlightData flight = new FlightData(number, company, time);
-            flight.setState(Arriving.getIntance());
+                COLLECTION.insertFlight(flight);
 
-            COLLECTION.insertFlight(flight);
-
-            response.sendRedirect(ADMIN_PAGE);
+                response.sendRedirect(ADMIN_PAGE);
+            }
+            
         } catch (NumberFormatException e) {
             String errorMessage = "Dados inválidos: O número do voo deve ser um número válido.";
-            
+
             response.sendRedirect(CADASTRO_VOO_PAGE + "?error=true&message=" + URLEncoder.encode(errorMessage, "UTF-8"));
         } catch (IllegalArgumentException e) {
             String errorMessage = "Dados inválidos: " + e.getMessage();
-            
+
             response.sendRedirect(CADASTRO_VOO_PAGE + "?error=true&message=" + URLEncoder.encode(errorMessage, "UTF-8"));
         }
     	
     }
+
 
     // Método para garantir que o parâmetro numérico é válido
     private Long parseLongParameter(HttpServletRequest request, String paramName) {
@@ -85,6 +96,5 @@ public class CadastroVooController extends HttpServlet {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("O parâmetro '" + paramName + "' deve ser um número válido.");
         }
-        
     }
 }

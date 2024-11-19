@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração</title>
+    <link rel="icon" href="images/profile_image.png" type="image/png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -24,7 +25,7 @@
                 <div class="card-body">
                     <ul class="list-unstyled">
                         <li><a href="cadastrarVoo.do?action=cadastrarVoo" class="btn btn-primary btn-block mb-2">Cadastrar Voo</a></li>
-                        <li><a href="atualizarVoo.jsp" class="btn btn-warning btn-block">Atualizar Voo</a></li>
+                        <li><a href="updateVoo.do?action=showFlights" class="btn btn-warning btn-block">Atualizar Voo</a></li>
                     </ul>
                 </div>
             </div>

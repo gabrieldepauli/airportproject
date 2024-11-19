@@ -7,7 +7,7 @@ public class TakingOff implements State {
 	
 	private TakingOff() { }
 	
-	public static TakingOff getIntance() {
+	public static TakingOff getInstance() {
 		if (instance == null) {
 			instance = new TakingOff();
 		}
@@ -16,7 +16,7 @@ public class TakingOff implements State {
 
 	@Override
 	public void change(FlightData flight) {
-		flight.setState(TookOff.getIntance());
+		flight.setState(TookOff.getInstance());
 	}
 
 }

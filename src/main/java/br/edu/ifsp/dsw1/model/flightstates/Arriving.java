@@ -7,7 +7,7 @@ public class Arriving implements State {
 	
 	private Arriving() { }
 	
-	public static Arriving getIntance() {
+	public static Arriving getInstance() {
 		if (instance == null) {
 			instance = new Arriving();
 		}
@@ -16,7 +16,7 @@ public class Arriving implements State {
 
 	@Override
 	public void change(FlightData flight) {
-		flight.setState(Boarding.getIntance());
+		flight.setState(Boarding.getInstance());
 	}
 
 }
