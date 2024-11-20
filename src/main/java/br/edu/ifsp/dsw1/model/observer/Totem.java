@@ -17,10 +17,9 @@ public abstract class Totem implements FlightDataObserver {
         
         // Filtra todos os voos baseados no estado desejado
         List<FlightData> filteredFlights = flightCollection.getAllFligthts().stream()
-            .filter(f -> isStateDesired(f.getState())) // Chama o método que define o estado desejado
+            .filter(f -> isStateDesired(f.getState()))
             .collect(Collectors.toList());
 
-        // Exibe os voos filtrados
         System.out.println(getClass().getSimpleName() + " recebeu voos atualizados: " + filteredFlights);
     }
 
@@ -29,7 +28,7 @@ public abstract class Totem implements FlightDataObserver {
         FlightDataCollection flightCollection = FlightDataSingleton.getInstance();
         
         return flightCollection.getAllFligthts().stream()
-            .filter(f -> isStateDesired(f.getState())) // Chama o método que define o estado desejado
+            .filter(f -> isStateDesired(f.getState()))
             .collect(Collectors.toList());
     }
 
