@@ -8,9 +8,10 @@ O projeto do Aeroporto (gerenciador de Voos) foi criado por Gabriel de Pauli San
 
 ### Tecnologias utilizadas:
 
-- **JSP:** Foi Utilizado para a criação de todas as páginas utilizadas.
+- **JSP:** Utilizado na criação das páginas usadas no projeto.
 - **Java:** Principal linguagem de programação utilizada, necessária para a criação de toda a lógica das funções do programa.
 - **Bootstrap:** Utilizado para estilizar as página JSP.
+- **CSS:** Utilizado para fazer a estilização das páginas utilizadas.
 
 ## Sobre o projeto
 
@@ -22,7 +23,7 @@ Para que o sistema funcione corretamente foram adicionadas algumas funções:
 
 - **Login:** O sistema possui uma página de login onde somente o Administrador pode ter acesso, as credenciais de acesso são o usuário "admin" e a senha "admin".
 
-- **Página do administrador:** Após ser efetuado o Login, o administrador terá acesso a uma página de aministração com dois botões para as funcionalidades de "Cadastrar um Voo" e de "Atualizar um Voo". Além dos botões de Logout e voltar a páina inicial.
+- **Página do administrador:** Após ser efetuado o Login, o administrador terá acesso a uma página de aministração com dois botões para as funcionalidades de "Cadastrar um Voo" e de "Atualizar um Voo". Além dos botões de Logout e voltar a página inicial.
 
 - **Cadastro de voos:** Clicando no botão de cadastrar voo, o administrador poderá incluir um Voo, no qual deve possuir um número (único), o nome da companhia aérea e o dia e horário do voo. Apenas o administrador tem acesso a essa função.
 
