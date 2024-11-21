@@ -39,3 +39,51 @@ Para que o sistema funcione corretamente foram adicionadas algumas funções:
 Nesta página é onde teremos acessos aos links para fazer o login do Administrador e para acesso aos Totens, que possuem as tabelas de voo com seu estado.
 
 ![Página Inicial](prints/pagina_inicial.png)
+
+### Login Administrador
+
+A Página de Login do administrador é o local onde deve ser inserido o username "admin" e senha "admin" para se ter acesso a página do administrador e suas funcionalidades. Se o login e senha estiverem errados será exibida uma mensagem de erro na tela.
+
+![Login Administrador](prints/login_adm.png)
+
+### Página do Administrador
+
+A Página do Administrador é a página onde serão mostrados os botões para as funcionalidades de "Adicionar Voo", "Alterar Voo", "Logout", "Voltar para página inicial".
+
+![Página do Administrador](prints/painel_adm.png)
+
+### Cadastro de Voos
+
+A Página de cadastro de voos é onde o administrador poderá incluir novos voos, inserindo o número, o nome da empresa aérea e a data e hora do voo.
+
+![Cadastro de Voos](prints/cadastro_voo.png)
+
+### Atualizar Estado do Voo
+
+A Página de atualizar estado do voo é onde será possível modificar o estado do voo. Aqui será mostrada uma tabela com todos os voos do sistema e a opção individual de alterar o estado.
+
+![Atualizar Estado do Voo](prints/atualizar_estado.png)
+
+### Totem Sala de Embarque
+
+Nesta página do Totem de Embarque será exibida uma tabela com todos os voos no estado "embarque" (ou "boarding").
+
+![Totem Sala de Embarque](prints/totem_embarque.png)
+
+### Totem Sala de Desembarque
+
+Nesta página do Totem de Desembarque será exibida uma tabela com todos os voos no estado "chegando" (ou "Arriving").
+
+![Totem Sala de Desembarque](prints/totem_desembarque.png)
+
+### Totem Hall 1
+
+Nesta página do Totem do Hall 1 será exibida uma tabela com todos os voos no estado "decolando" (ou "Taking Off").
+
+![Totem Hall 1](prints/totem_decolando.png)
+
+### Totem Hall 2
+
+Nesta página do Totem do Hall 2 será exibida uma tabela com todos os voos no estado "decolado" (ou "Took Off").
+
+![Totem Hall 2](prints/totem_decolado.png)
