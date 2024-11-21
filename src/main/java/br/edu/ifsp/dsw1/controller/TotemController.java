@@ -12,74 +12,93 @@ import br.edu.ifsp.dsw1.model.observer.SalaDeDesembarqueTotem;
 import br.edu.ifsp.dsw1.model.observer.Hall1Totem;
 import br.edu.ifsp.dsw1.model.observer.Hall2Totem;
 
+// Anotação para mapear a URL "/totem.do" para este servlet
 @WebServlet("/totem.do")
 public class TotemController extends HttpServlet{
     private static final long serialVersionUID = 1L;
 
+    // Método para processar requisições GET
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request, response); // Chama o método para processar a requisição
     }
 
+    // Método para processar requisições POST
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request, response); // Chama o método para processar a requisição
     }
 
+    // Método comum para processar tanto GET quanto POST
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
+        // Obtém o parâmetro "action" da requisição para decidir qual ação tomar
         String action = request.getParameter("action");
         String page = null;
         
+        // Verifica qual ação foi passada na requisição e chama o método correspondente
         if(action.equals("getSalaDesembarque")) {
-        	page = handleSalaDesembarque(request, response);
-        }else if(action.equals("getSalaEmbarque")) {
-        	page = handleSalaEmbarque(request, response);
-        }else if(action.equals("getHall1")) {
-        	page = handleHall1(request, response);
-        }else if(action.equals("getHall2")) {
-        	page = handleHall2(request, response);
+            page = handleSalaDesembarque(request, response); // Chama o método para exibir informações da Sala de Desembarque
+        } else if(action.equals("getSalaEmbarque")) {
+            page = handleSalaEmbarque(request, response); // Chama o método para exibir informações da Sala de Embarque
+        } else if(action.equals("getHall1")) {
+            page = handleHall1(request, response); // Chama o método para exibir informações do Hall 1
+        } else if(action.equals("getHall2")) {
+            page = handleHall2(request, response); // Chama o método para exibir informações do Hall 2
         }
         
+        // Utiliza o RequestDispatcher para encaminhar a requisição para a página correspondente
         RequestDispatcher dispatcher = request.getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }
 
+    // Método para lidar com a Sala de Desembarque
     protected String handleSalaDesembarque(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Criando o totem de desembarque
+        
+        // Cria uma instância de SalaDeDesembarqueTotem para obter as informações dos voos
         SalaDeDesembarqueTotem salaDeDesembarqueTotem = new SalaDeDesembarqueTotem();
 
-        // Adicionando os voos no request
+        // Define a lista de voos que estão chegando como atributo da requisição
         request.setAttribute("flightsArriving", salaDeDesembarqueTotem.getFlights());
 
+        // Retorna o nome da página que exibirá as informações da Sala de Desembarque
         return "salaDeDesembarque.jsp";
     }
 
+    // Método para lidar com a Sala de Embarque
     protected String handleSalaEmbarque(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Criando o totem de embarque
+        
+        // Cria uma instância de SalaDeEmbarqueTotem para obter as informações dos voos
         SalaDeEmbarqueTotem salaDeEmbarqueTotem = new SalaDeEmbarqueTotem();
 
-        // Adicionando os voos no request
+        // Define a lista de voos que estão embarcando como atributo da requisição
         request.setAttribute("flightsBoarding", salaDeEmbarqueTotem.getFlights());
 
+        // Retorna o nome da página que exibirá as informações da Sala de Embarque
         return "salaDeEmbarque.jsp";
     }
 
+    // Método para lidar com o Hall 1
     protected String handleHall1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Criando o totem para Hall 1
+        
+        // Cria uma instância de Hall1Totem para obter as informações dos voos
         Hall1Totem hall1Totem = new Hall1Totem();
 
-        // Adicionando os voos no request
+        // Define a lista de voos que estão saindo como atributo da requisição
         request.setAttribute("flightsTakingOff", hall1Totem.getFlights());
 
+        // Retorna o nome da página que exibirá as informações do Hall 1
         return "hall1.jsp";
     }
 
+    // Método para lidar com o Hall 2
     protected String handleHall2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Criando o totem para Hall 2
+        
+        // Cria uma instância de Hall2Totem para obter as informações dos voos
         Hall2Totem hall2Totem = new Hall2Totem();
 
-        // Adicionando os voos no request
+        // Define a lista de voos que já decolaram como atributo da requisição
         request.setAttribute("flightsTookOff", hall2Totem.getFlights());
 
+        // Retorna o nome da página que exibirá as informações do Hall 2
         return "hall2.jsp";
     }
 }
