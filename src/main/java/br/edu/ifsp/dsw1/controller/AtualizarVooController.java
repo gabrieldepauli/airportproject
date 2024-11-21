@@ -35,9 +35,15 @@ public class AtualizarVooController extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-
-        String page;
+        String action = request.getParameter("action");      
+        String page = null;
+        
+        if (action == null) {
+            // Em vez de assumir "showFlights", podemos retornar um erro ou redirecionar
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro 'action' não fornecido.");
+            return; // Interrompe a execução se o parâmetro 'action' não estiver presente
+        }
+        
         switch (action) {
             case "showFlights":
                 page = handleShowFlights(request);
@@ -48,11 +54,13 @@ public class AtualizarVooController extends HttpServlet {
                 break;
 
             default:
-                page = "admin.jsp";
-                break;
+            	response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação desconhecida: " + action);
         }
 
-        request.getRequestDispatcher(page).forward(request, response);
+        if (page != null) {
+            request.getRequestDispatcher(page).forward(request, response);
+        }
+
     }
 
     private String handleShowFlights(HttpServletRequest request) {
@@ -62,7 +70,7 @@ public class AtualizarVooController extends HttpServlet {
 
         // Define a lista de voos como atributo
         request.setAttribute("flights", flights);
-
+ 
         return "atualizarEstado.jsp";
     }
 

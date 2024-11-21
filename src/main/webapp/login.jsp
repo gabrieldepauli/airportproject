@@ -1,4 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="true" %>
+<%
+    // Verifica se o usuário já está logado
+    if (session.getAttribute("user") != null) {
+        // Se já estiver logado, redireciona para a página administrativa
+        response.sendRedirect("admin.jsp");
+        return;  // Interrompe a execução do código
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

@@ -35,12 +35,7 @@ public class CadastroVooController extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-
-        if (action == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Ação não especificada");
-            return;
-        }
-
+        
         switch (action) {
             case "cadastrarVoo":
                 cadastrarVoo(request, response);

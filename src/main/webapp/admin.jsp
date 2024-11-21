@@ -1,5 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
+<%
+    // Verifica se o usuário está logado
+    if (session.getAttribute("user") == null) {
+        // Se não estiver logado, redireciona para a página de login
+        response.sendRedirect("login.do");
+        return;  // Interrompe a execução do código
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

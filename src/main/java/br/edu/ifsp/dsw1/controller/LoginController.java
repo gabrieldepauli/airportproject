@@ -19,7 +19,17 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+    	
+    	// Verifica se o usuário já está logado, caso contrário, mostra a página de login
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("user") != null) {
+            // Se o usuário já estiver logado, redireciona para a página de administração
+            response.sendRedirect("admin.jsp");
+        } else {
+            // Se o usuário não estiver logado, exibe a página de login
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+        
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
