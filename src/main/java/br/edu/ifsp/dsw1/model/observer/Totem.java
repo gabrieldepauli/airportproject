@@ -5,6 +5,7 @@ import br.edu.ifsp.dsw1.model.entity.FlightDataCollection;
 import br.edu.ifsp.dsw1.model.entity.FlightDataSingleton;
 import java.util.List;
 
+// Classe abstrata Totem que implementa FlightDataObserver, criada para ser utilizada pelas outras classes que a estenderem
 public abstract class Totem implements FlightDataObserver {
 
 	private final FlightDataCollection flightData = FlightDataSingleton.getInstance();

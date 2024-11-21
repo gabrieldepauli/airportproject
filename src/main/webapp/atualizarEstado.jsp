@@ -1,6 +1,8 @@
 <%@page import="br.edu.ifsp.dsw1.model.entity.FlightData"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%
     // Verifica se o usuário está logado
     if (session.getAttribute("user") == null) {

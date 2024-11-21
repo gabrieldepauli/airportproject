@@ -16,29 +16,38 @@ public class SalaDeEmbarqueTotem extends Totem {
 	// Sobrescreve o método getFlights() para filtrar voos no estado Boarding
     @Override
     public List<FlightData> getFlights() {
-    	if (!registered) { // verifica se este totem ja esta registrado como um observer
-    		flightData.register(this); // registra como observer
-    		registered = true;
+    	if (registered == false) { // Faz a verificação se o totem já está registrado
+    		flightData.register(this); // Se não estiver registrado, ele registra o totem como observer
+    		registered = true; // O boolean de registrado agora passa a ser TRUE
         }
     	
+    	// Cria uma lista de voos com todos os voos
     	List<FlightData> listaVoos = super.getFlights().stream()
                 .filter(flight -> flight.getState() instanceof Boarding)
                 .collect(Collectors.toList());
     	
-    	if (listaVoos.isEmpty() && registered) { //verifica se ja tiver registrado e puder ser unregister
-            flightData.unregister(this); // Exclui o registro deste totem como observer
-            registered = false;
-        }
+    	// Chama a função que exclui o Observer
+    	unregisterObserver(listaVoos);
     	
+    	// Retorna a lista de Voos
     	return listaVoos;
     }
     
-    // Atualiza o totem sempre que há uma mudança em algum voo
+    // Este método reage às atualizações dos voos (Observer - update)
     @Override
     public void update(FlightData flight) {
         if (flight.getState() instanceof Boarding) {
-        	System.out.println("Voo atualizado: " + flight.getFlightNumber() + 
-                               " para o estado: " + flight.getState().getClass().getSimpleName());
+        	// Mensagem que será exibida no console quando o Voo for atualizado
+            System.out.println("Voo de número: " + flight.getFlightNumber() + 
+                               " atualizado para o estado: " + flight.getState().getClass().getSimpleName());
+        }
+    }
+    
+    // Este método é responsável por excluir o Observer
+    private void unregisterObserver(List<FlightData> listaVoos) {
+        if (listaVoos.isEmpty() && registered == true) {
+            flightData.unregister(this); // Exclui o registro deste totem como observer
+            registered = false; // O boolean de registrado agora passa a ser FALSE
         }
     }
     
