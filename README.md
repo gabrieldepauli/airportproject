@@ -31,3 +31,11 @@ Para que o sistema funcione corretamente foram adicionadas algumas funções:
 - **Logout:** Na página da administração, assim que o administrador estiver logado no sistema, ele poderá clicar no botão de logout que irá encerrar sua sessão e o redirecionar para página inicial.
 
 - **Páginas dos totens:** No menu inicial ("index") estão os links para cada Totem, nessas páginas (Totem) poderão ser visualizados os Voos de cada estado (chegando, embarcando, decolando e decolado).
+
+## Fotos do site em funcionamento
+
+### Página Inicial
+
+Nesta página é onde teremos acessos aos links para fazer o login do Administrador e para acesso aos Totens, que possuem as tabelas de voo com seu estado.
+
+![Página Inicial](prints/pagina_inicial.png)
