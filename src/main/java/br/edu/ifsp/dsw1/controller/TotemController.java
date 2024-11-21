@@ -1,80 +1,85 @@
 package br.edu.ifsp.dsw1.controller;
 
-import br.edu.ifsp.dsw1.model.observer.Hall1Totem;
-import br.edu.ifsp.dsw1.model.observer.Hall2Totem;
-import br.edu.ifsp.dsw1.model.observer.SalaDeEmbarqueTotem;
-import br.edu.ifsp.dsw1.model.observer.Totem;
-import br.edu.ifsp.dsw1.model.observer.SalaDeDesembarqueTotem;
-import br.edu.ifsp.dsw1.model.entity.FlightData;
-import br.edu.ifsp.dsw1.model.entity.FlightDataSingleton;
-import br.edu.ifsp.dsw1.model.entity.FlightDataCollection;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import br.edu.ifsp.dsw1.model.observer.SalaDeEmbarqueTotem;
+import br.edu.ifsp.dsw1.model.observer.SalaDeDesembarqueTotem;
+import br.edu.ifsp.dsw1.model.observer.Hall1Totem;
+import br.edu.ifsp.dsw1.model.observer.Hall2Totem;
 
-public class TotemController extends HttpServlet {
+@WebServlet("/totem.do")
+public class TotemController extends HttpServlet{
+    private static final long serialVersionUID = 1L;
 
-    private FlightDataCollection flightCollection;
-
-    public TotemController() {
-        this.flightCollection = FlightDataSingleton.getInstance();
-    }
-
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String totemType = request.getParameter("totem");
-
-        // Cria o totem baseado no tipo
-        Totem totem = getTotemByType(totemType);
-
-        if (totem != null) {
-            flightCollection.register(totem);
-            List<FlightData> filteredFlights = totem.getFilteredFlights();
-
-            request.setAttribute("filteredFlights", filteredFlights);
-            request.getRequestDispatcher("/displayFlights.jsp").forward(request, response); // Exemplo de redirecionamento para a JSP
-        } else {
-            response.getWriter().println("Totem não encontrado!");
-        }
+        processRequest(request, response);
     }
 
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String totemType = request.getParameter("totem");
-
-        // Cria o totem baseado no tipo
-        Totem totem = getTotemByType(totemType);
-
-        if (totem != null) {
-            flightCollection.register(totem);
-            List<FlightData> filteredFlights = totem.getFilteredFlights();
-
-            response.getWriter().println("Totem atualizado com os voos filtrados: " + filteredFlights);
-        } else {
-            response.getWriter().println("Totem não encontrado!");
-        }
+        processRequest(request, response);
     }
 
-    // Método que mapeia o tipo de totem para a classe correspondente
-    private Totem getTotemByType(String totemType) {
-        if (totemType == null) {
-            return null;
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        String action = request.getParameter("action");
+        String page = null;
+        
+        if(action.equals("getSalaDesembarque")) {
+        	page = handleSalaDesembarque(request, response);
+        }else if(action.equals("getSalaEmbarque")) {
+        	page = handleSalaEmbarque(request, response);
+        }else if(action.equals("getHall1")) {
+        	page = handleHall1(request, response);
+        }else if(action.equals("getHall2")) {
+        	page = handleHall2(request, response);
         }
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+        dispatcher.forward(request, response);
+    }
 
-        switch (totemType.toLowerCase()) {
-            case "hall1":
-                return new Hall1Totem();
-            case "hall2":
-                return new Hall2Totem();
-            case "salaembarque":
-                return new SalaDeEmbarqueTotem();
-            case "saladesembarque":
-                return new SalaDeDesembarqueTotem();
-            default:
-                return null;
-        }
+    protected String handleSalaDesembarque(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Criando o totem de desembarque
+        SalaDeDesembarqueTotem salaDeDesembarqueTotem = new SalaDeDesembarqueTotem();
+
+        // Adicionando os voos no request
+        request.setAttribute("flightsArriving", salaDeDesembarqueTotem.getFlights());
+
+        return "salaDeDesembarque.jsp";
+    }
+
+    protected String handleSalaEmbarque(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Criando o totem de embarque
+        SalaDeEmbarqueTotem salaDeEmbarqueTotem = new SalaDeEmbarqueTotem();
+
+        // Adicionando os voos no request
+        request.setAttribute("flightsBoarding", salaDeEmbarqueTotem.getFlights());
+
+        return "salaDeEmbarque.jsp";
+    }
+
+    protected String handleHall1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Criando o totem para Hall 1
+        Hall1Totem hall1Totem = new Hall1Totem();
+
+        // Adicionando os voos no request
+        request.setAttribute("flightsTakingOff", hall1Totem.getFlights());
+
+        return "hall1.jsp";
+    }
+
+    protected String handleHall2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Criando o totem para Hall 2
+        Hall2Totem hall2Totem = new Hall2Totem();
+
+        // Adicionando os voos no request
+        request.setAttribute("flightsTookOff", hall2Totem.getFlights());
+
+        return "hall2.jsp";
     }
 }

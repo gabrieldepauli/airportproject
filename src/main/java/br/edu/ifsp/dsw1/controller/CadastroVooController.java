@@ -70,7 +70,7 @@ public class CadastroVooController extends HttpServlet {
                 flight.setState(Arriving.getInstance());
 
                 COLLECTION.insertFlight(flight);
-
+                
                 response.sendRedirect(ADMIN_PAGE);
             }
             

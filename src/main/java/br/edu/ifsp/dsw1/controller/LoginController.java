@@ -67,7 +67,7 @@ public class LoginController extends HttpServlet {
             session.invalidate();
         }
         
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("index.jsp");
     }
     
     // Método para verificar e validar o usuário e senha
