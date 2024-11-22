@@ -65,8 +65,8 @@ public class CadastroVooController extends HttpServlet {
 
             if (flightExists) {
                 // Se o voo já existir, define uma mensagem de erro e redireciona de volta para a página de cadastro
-                request.setAttribute("errorMessageCadastro", "Já existe um voo com este número.");
-                request.getRequestDispatcher(CADASTRO_VOO_PAGE).forward(request, response);
+            	String errorMessage = "Já existe um voo com este número.";
+                response.sendRedirect(CADASTRO_VOO_PAGE + "?error=true&message=" + URLEncoder.encode(errorMessage, "UTF-8"));
             } else {
                 // Caso contrário, pega os parâmetros da companhia aérea e horário de chegada
                 String company = request.getParameter("company").trim();
