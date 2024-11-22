@@ -11,7 +11,7 @@ O projeto do Aeroporto (gerenciador de Voos) foi criado por Gabriel de Pauli San
 - **JSP:** Utilizado na criação das páginas usadas no projeto.
 - **HTML:** Utilizado na criação da JSP "index".
 - **Java:** Principal linguagem de programação utilizada, necessária para a criação de toda a lógica das funções do programa.
-- **Servlet:** Utilizado nos FrontControllers.
+- **Servlet:** Utilizado nos FrontControllers. **Está sendo utilizado o Java 21 no Eclipse**
 - **Bootstrap:** Utilizado para estilizar as página JSP.
 - **CSS:** Utilizado para fazer a estilização das páginas utilizadas.
 - **Padrões de Projeto:** Foram utilizados os padrões FrontControler, MVC, State, Observer e Singleton.
