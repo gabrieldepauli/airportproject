@@ -34,20 +34,35 @@ public class TotemController extends HttpServlet{
         String action = request.getParameter("action");
         String page = null;
         
-        // Verifica qual ação foi passada na requisição e chama o método correspondente
-        if(action.equals("getSalaDesembarque")) {
-            page = handleSalaDesembarque(request, response); // Chama o método para exibir informações da Sala de Desembarque
-        } else if(action.equals("getSalaEmbarque")) {
-            page = handleSalaEmbarque(request, response); // Chama o método para exibir informações da Sala de Embarque
-        } else if(action.equals("getHall1")) {
-            page = handleHall1(request, response); // Chama o método para exibir informações do Hall 1
-        } else if(action.equals("getHall2")) {
-            page = handleHall2(request, response); // Chama o método para exibir informações do Hall 2
+        // Se o parâmetro "action" não for fornecido, retorna erro
+        if (action == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro 'action' não fornecido.");
+            return; // Interrompe a execução do código
         }
         
-        // Utiliza o RequestDispatcher para encaminhar a requisição para a página correspondente
-        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-        dispatcher.forward(request, response);
+        switch(action) {
+        	case "getSalaDesembarque":
+        		page = handleSalaDesembarque(request, response); // Chama o método para exibir informações da Sala de Desembarque
+        		break;
+        	case "getSalaEmbarque":
+        		page = handleSalaEmbarque(request, response); // Chama o método para exibir informações da Sala de Embarque
+        		break;
+        	case "getHall1":
+        		page = handleHall1(request, response); // Chama o método para exibir informações do Hall 1
+        		break;
+        	case "getHall2":
+        		page = handleHall2(request, response); // Chama o método para exibir informações do Hall 2
+        		break;
+        		
+        	default:  // Se a ação não for reconhecida, retorna erro
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação desconhecida: " + action);
+        }
+        
+        // Se uma página foi determinada, redireciona para ela
+        if (page != null) {
+            request.getRequestDispatcher(page).forward(request, response);
+        }
+        
     }
 
     // Método para lidar com a Sala de Desembarque
@@ -102,3 +117,4 @@ public class TotemController extends HttpServlet{
         return "hall2.jsp";
     }
 }
+

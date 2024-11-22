@@ -49,11 +49,11 @@ public class AtualizarVooController extends HttpServlet {
         // Switch que decide a ação com base no valor do parâmetro "action"
         switch (action) {
             case "showFlights":  // Exibe a lista de voos
-                page = handleShowFlights(request);
+                page = handleShowFlights(request, response);
                 break;
 
             case "updateFlightState":  // Atualiza o estado de um voo
-                page = handleUpdateFlightState(request);
+                page = handleUpdateFlightState(request, response);
                 break;
 
             default: // Se a ação não for reconhecida, retorna erro 404
@@ -68,7 +68,7 @@ public class AtualizarVooController extends HttpServlet {
     }
 
     // Método para exibir a lista de voos
-    private String handleShowFlights(HttpServletRequest request) {
+    private String handleShowFlights(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtém a coleção de voos do Singleton
         FlightDataCollection flightCollection = FlightDataSingleton.getInstance();
         List<FlightData> flights = flightCollection.getAllFligthts();  // Recupera todos os voos
@@ -81,7 +81,7 @@ public class AtualizarVooController extends HttpServlet {
     }
 
     // Método para atualizar o estado de um voo
-    private String handleUpdateFlightState(HttpServletRequest request) {
+    private String handleUpdateFlightState(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtém a coleção de voos do Singleton
         FlightDataCollection collection = FlightDataSingleton.getInstance();
         Long number = Long.parseLong(request.getParameter("numeroVoo"));  // Recupera o número do voo do parâmetro da requisição

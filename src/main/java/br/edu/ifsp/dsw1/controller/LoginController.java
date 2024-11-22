@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
     }
 
     // Método para realizar o login
-    private void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void handleLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");  // Obtém o nome de usuário da requisição
         String password = request.getParameter("password");  // Obtém a senha da requisição
 
@@ -72,7 +72,7 @@ public class LoginController extends HttpServlet {
     }
 
     // Método para realizar o logout e encerrar a sessão
-    private void handleLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void handleLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);  // Obtém a sessão existente, sem criá-la se não existir
         
         if (session != null) {
